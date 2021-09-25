@@ -72,9 +72,13 @@
 				<version>3.1.4</version>
 				<configuration>
 					<to>
-						<image>ghcr.io/rowa78/eve-online-authenticationservice</image>
+						<image>r0wa/eve/authenticationservice</image>
+						<auth>
+							<username>${env.DOCKER_USERNAME}</username>
+							<password>${env.DOCKER_PASSWORD}</password>
+						</auth>
 						<tags>
-							<tag>${project.parent.version}</tag>
+							<tag>${project.version}</tag>
 							<tag>latest</tag>
 						</tags>
 					</to>
