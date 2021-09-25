@@ -66,24 +66,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.1.4</version>
-				<configuration>
-					<to>
-						<image>r0wa/eve-authenticationservice</image>
-						<auth>
-							<username>${env.DOCKER_USERNAME}</username>
-							<password>${env.DOCKER_PASSWORD}</password>
-						</auth>
-						<tags>
-							<tag>${project.version}</tag>
-							<tag>latest</tag>
-						</tags>
-					</to>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
