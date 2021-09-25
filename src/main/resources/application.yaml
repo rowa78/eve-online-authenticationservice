@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:file:/data/characters
+    url: jdbc:h2:file:${DATA_DIR:./target/characters}
     username: sa
     password: sa
   h2:
@@ -19,10 +19,10 @@ spring:
       client:
         registration:
           eve:
-            clientId: client-id
-            clientSecret: client-secret
+            clientId: ${CLIENT_ID:client-id}
+            clientSecret: ${CLIENT_SECRET:client-secret}
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/eve
+            redirect-uri: ${URL:http://localhost:8080/login/oauth2/code/eve}
             client-authentication-method: basic
             scope:
               - esi-characters.read_standings.v1
