@@ -14,6 +14,6 @@ jobs:
           cache: 'maven'
           distribution: 'temurin'
       - name: build
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode package jib:build deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

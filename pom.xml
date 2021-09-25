@@ -72,7 +72,11 @@
 				<version>3.1.4</version>
 				<configuration>
 					<to>
-						<image>myimage</image>
+						<image>ghcr.io/rowa78/eve-online-authenticationservice</image>
+						<tags>
+							<tag>${project.parent.version}</tag>
+							<tag>latest</tag>
+						</tags>
 					</to>
 				</configuration>
 			</plugin>
