@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/characterservice")
+@RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
 public class AccountController {
