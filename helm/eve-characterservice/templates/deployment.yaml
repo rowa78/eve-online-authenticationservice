@@ -30,6 +30,8 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+          - name: TZ
+            value: Europe/Berlin
           - name: DATA_DIR
             value: "/data"
           - name: URL
