@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .oauth2Login()
                 .authorizationEndpoint()
-                .baseUri("/characterservice/oauth2/authorization");
+                .baseUri("/oauth2/authorization");
 
     }
 }
