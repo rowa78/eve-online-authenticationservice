@@ -29,6 +29,15 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          env:
+          - name: DATA_DIR
+            value: "/data"
+          - name: URL
+            value: "https://eve.ronnywalter.de"
+          - name: CLIENT_ID
+            value: "0834d8f19e2b4118a10d5ef714856908"
+          - name: CLIENT_SECRET
+            value: "iYd7djlupNuXZamOMeQKOundWw61gXRhBzn87E6I"
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -37,6 +46,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: data
           #livenessProbe:
           #  httpGet:
           #    path: /
@@ -47,6 +59,10 @@ spec:
           #    port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: character-service-data
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

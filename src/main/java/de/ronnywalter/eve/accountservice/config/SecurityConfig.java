@@ -17,8 +17,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/secure").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .oauth2Login()
+                .oauth2Client()
                 .and()
-                .oauth2Client();
+                .oauth2Login()
+                .authorizationEndpoint()
+                .baseUri("/characterservice/oauth2/authorization");
+
     }
 }
