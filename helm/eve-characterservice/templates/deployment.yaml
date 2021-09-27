@@ -29,17 +29,6 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          env:
-          - name: TZ
-            value: Europe/Berlin
-          - name: DATA_DIR
-            value: "/data"
-          - name: URL
-            value: "https://eve.ronnywalter.de"
-          - name: CLIENT_ID
-            value: "a6ce49f6c0b449fbac7f05a1ec4f24ac"
-          - name: CLIENT_SECRET
-            value: "27KrHe4Cm4QINGzcKFD4IqKSXEXKdHmZf4lHtvWg"
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -51,6 +40,40 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: data
+          env:
+            - name: TZ
+              value: Europe/Berlin
+            - name: URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-eve
+                  key: URL
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-eve
+                  key: CLIENT_ID
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-eve
+                  key: CLIENT_SECRET
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-database
+                  key: DB_URL
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-database
+                  key: DB_PASSWORD
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "eve-characterservice.fullname" . }}-database
+                  key: DB_USER
+
           #livenessProbe:
           #  httpGet:
           #    path: /

@@ -81,3 +81,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+database:
+  url: jdbc:h2:mem:db
+  username: sa
+  password: sa
+
+eve:
+  url: http://example.com
+  client_id: lhjkhjkhjk
+  client_secret: feioj34jeo
