@@ -36,7 +36,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: login to docker hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" ${{ secrets.DOCKER_REGISTRY }} --password-stdin
 
       - name: Extract Maven project version
         run: echo ::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -45,5 +45,5 @@ jobs:
       - name: build the image
         run: |
            docker buildx build --push \
-             --tag ${{ secrets.DOCKER_PASSWORD }}/eve/characterservice:${{ steps.project.outputs.version }} \
+             --tag ${{ secrets.DOCKER_REGISTRY }}/eve/characterservice:${{ steps.project.outputs.version }} \
              --platform linux/amd64,linux/arm64 .
