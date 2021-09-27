@@ -14,6 +14,14 @@ jobs:
           cache: 'maven'
           distribution: 'temurin'
 
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: nexus
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1

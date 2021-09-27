@@ -71,14 +71,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/rowa78/eve-online-authenticationservice</url>
+			<id>nexus</id>
+			<name>nexus-repo</name>
+			<url>${env.NEXUS_RELEASES_URL}</url>
 		</repository>
 		<snapshotRepository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/rowa78/eve-online-authenticationservice</url>
+			<id>nexus</id>
+			<name>nexus-repo</name>
+			<url>${env.NEXUS_SNAPSHOTS_URL}</url>
 		</snapshotRepository>
 	</distributionManagement>
 
