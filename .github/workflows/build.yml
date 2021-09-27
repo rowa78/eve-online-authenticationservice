@@ -45,5 +45,5 @@ jobs:
       - name: build the image
         run: |
            docker buildx build --push \
-             --tag r0wa/eve-authenticationservice:${{ steps.project.outputs.version }} \
+             --tag ${{ secrets.DOCKER_PASSWORD }}/eve/characterservice:${{ steps.project.outputs.version }} \
              --platform linux/amd64,linux/arm64 .
