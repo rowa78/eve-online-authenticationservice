@@ -30,6 +30,8 @@ jobs:
         run: mvn --batch-mode package deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEXUS_SNAPSHOTS_URL: ${{ secrets.NEXUS_SNAPSHOTS_URL }}
+          NEXUS_RELEASES_URL: ${{ secrets.NEXUS_RELEASES_URL }}
 
       - name: login to docker hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
