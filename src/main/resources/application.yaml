@@ -1,19 +1,7 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-  h2:
-    console:
-      enabled: false
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+  data:
+    mongodb:
+      uri: ${DB_URL:mongodb://localhost/eve_dev}
   security:
     oauth2:
       client:
@@ -22,7 +10,7 @@ spring:
             clientId: ${CLIENT_ID:client-id}
             clientSecret: ${CLIENT_SECRET:client-secret}
             authorization-grant-type: authorization_code
-            redirect-uri: ${URL}/login/oauth2/code/eve
+            redirect-uri: ${URL:http://localhost:8080}/login/oauth2/code/eve
             client-authentication-method: basic
             scope:
               - esi-characters.read_standings.v1

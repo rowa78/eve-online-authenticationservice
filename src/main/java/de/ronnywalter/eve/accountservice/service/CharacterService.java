@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -46,7 +47,8 @@ public class CharacterService {
     public String getAccessToken(String characterName) throws EveCharacterNotFoundException {
         EveCharacter eveCharacter = this.getEveCharacter(characterName);
         ZonedDateTime expiryDate = eveCharacter.getExpiryDate();
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(30);;
+        //ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(30);;
+        ZonedDateTime now = ZonedDateTime.now();
         if(now.isAfter(expiryDate)) {
             log.debug("get new AccessToken for " + characterName);
             try {
@@ -96,7 +98,7 @@ public class CharacterService {
                 eveCharacter.setRefreshToken(result.get("refresh_token").toString());
 
                 Integer seconds = Integer.parseInt(result.get("expires_in").toString());
-                ZonedDateTime newExpiryTime = ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(seconds);
+                ZonedDateTime newExpiryTime = ZonedDateTime.now().plusSeconds(seconds);
                 eveCharacter.setExpiryDate(newExpiryTime);
 
                 characterRepository.save(eveCharacter);

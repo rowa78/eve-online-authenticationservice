@@ -16,8 +16,10 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
@@ -92,7 +94,9 @@ public class AccountController {
             c.setRefreshToken(client.getRefreshToken().getTokenValue());
             c.setName(name);
             DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            c.setExpiryDate(LocalDateTime.parse(attributes.get("ExpiresOn").toString(), dtf).atZone(ZoneId.of("UTC")));
+            ZonedDateTime zdf = LocalDateTime.parse(attributes.get("ExpiresOn").toString(), dtf).atZone(ZoneId.of("UTC"));
+
+            c.setExpiryDate(zdf);
             c.setClientId(clientId);
 
             characterService.saveCharacter(c);
